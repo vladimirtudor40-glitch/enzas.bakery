@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+/*
+ * "Vintage Handmade" theme — linen textures, stitched seams, gingham and
+ * mustard buttons. Token names are kept so every component stays in sync:
+ *   oat         → pink linen page background
+ *   cream       → light cream panels / labels
+ *   espresso    → chocolate brown (text + dark sections)
+ *   cocoa       → muted brown text
+ *   terracotta  → salmon pink accents (decor only, never behind small white text)
+ *   mustard     → primary CTA
+ */
+@theme {
+  --color-cream: #fbf3e4;
+  --color-oat: #f3d8cf;
+  --color-blush: #eab4a6;
+  --color-espresso: #5a2a20;
+  --color-cocoa: #7e4636;
+  --color-terracotta: #e9a090;
+  --color-terracotta-dark: #9c3f33;
+  --color-mustard: #ffc557;
+  --color-mustard-dark: #f2ab34;
+  --color-sky: #bfe0ee;
+  --color-sage: #a3b05a;
+  --color-sage-deep: #5e6b2e;
+
+  --font-serif: var(--font-zilla), "Rockwell", Georgia, serif;
+  --font-sans: var(--font-zilla), "Rockwell", Georgia, serif;
+  --font-hand: var(--font-amatic), "Arial Narrow", sans-serif;
+  --font-script: var(--font-lobster), "Brush Script MT", cursive;
+
+  --shadow-warm: 0 2px 0 rgb(90 42 32 / 0.08), 0 10px 24px -10px rgb(90 42 32 / 0.35);
+  --shadow-warm-lg: 0 3px 0 rgb(90 42 32 / 0.1), 0 24px 44px -16px rgb(90 42 32 / 0.45);
+  --shadow-button: 0 3px 0 #d8902a, 0 8px 18px -8px rgb(90 42 32 / 0.5);
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-oat font-sans text-espresso antialiased;
+    background-image: var(--linen), var(--polka);
+    background-size: 220px 220px, 120px 120px;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-mustard text-espresso;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-espresso;
+  }
+
+  button,
+  [role="tab"],
+  a {
+    cursor: pointer;
+  }
+}
+
+:root {
+  /* Woven linen grain */
+  --linen: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.08' numOctaves='2' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.16 0 0 0 0 0.12 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.08 0.9' numOctaves='2' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.16 0 0 0 0 0.12 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+  /* Soft tone-on-tone dots */
+  --polka: radial-gradient(circle at 30px 30px, rgb(255 255 255 / 0.22) 9px, transparent 10px),
+    radial-gradient(circle at 90px 90px, rgb(255 255 255 / 0.22) 9px, transparent 10px);
+}
+
+@utility container-bakery {
+  @apply mx-auto w-full max-w-[1280px] px-5 sm:px-8 lg:px-12 2xl:max-w-[1440px];
+}
+
+@utility heading-caps {
+  @apply font-serif font-bold tracking-[0.08em] uppercase;
+}
+
+@utility btn {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-5 font-serif text-[13px] font-bold text-center tracking-[0.08em] uppercase sm:px-6 sm:text-sm sm:tracking-[0.12em] sm:whitespace-nowrap transition-[background-color,color,box-shadow,border-color] duration-200 ease-(--ease-soft);
+}
+
+@utility btn-primary {
+  @apply btn bg-mustard text-espresso hover:bg-mustard-dark;
+  box-shadow: var(--shadow-button);
+  background-image: var(--linen);
+  background-size: 220px 220px;
+}
+
+@utility btn-secondary {
+  @apply btn border-2 border-dashed border-espresso/35 bg-cream/70 text-espresso hover:border-espresso/60 hover:bg-cream;
+}
+
+@utility eyebrow {
+  @apply inline-flex items-center gap-2 font-serif text-xs font-bold tracking-[0.24em] text-terracotta-dark uppercase;
+}
+
+@utility badge-sage {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-dashed border-sage-deep/50 bg-cream/80 px-3 py-1 font-serif text-xs font-bold tracking-wider text-sage-deep uppercase;
+}
+
+/* Stitched seam drawn just inside a panel */
+@utility stitched {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border: 2px dashed rgb(90 42 32 / 0.35);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+}
+
+@utility stitched-light {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border: 2px dashed rgb(251 243 228 / 0.45);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+}
+
+@utility linen {
+  background-image: var(--linen);
+  background-size: 220px 220px;
+}
+
+@utility gingham {
+  background-color: #e4f1f7;
+  background-image:
+    linear-gradient(90deg, rgb(140 196 222 / 0.45) 50%, transparent 50%),
+    linear-gradient(rgb(140 196 222 / 0.45) 50%, transparent 50%), var(--linen);
+  background-size: 24px 24px, 24px 24px, 220px 220px;
+}
+
+@utility gingham-pink {
+  background-color: #f8e3dc;
+  background-image:
+    linear-gradient(90deg, rgb(233 160 144 / 0.35) 50%, transparent 50%),
+    linear-gradient(rgb(233 160 144 / 0.35) 50%, transparent 50%), var(--linen);
+  background-size: 28px 28px, 28px 28px, 220px 220px;
+}
+
+@utility chocolate {
+  @apply bg-espresso text-cream;
+  background-image: var(--linen);
+  background-size: 220px 220px;
+}
+
+/* Vintage label: notched corners like a pantry tag */
+@utility label-frame {
+  clip-path: polygon(
+    22px 0,
+    calc(100% - 22px) 0,
+    calc(100% - 22px) 10px,
+    calc(100% - 10px) 22px,
+    100% 22px,
+    100% calc(100% - 22px),
+    calc(100% - 10px) calc(100% - 22px),
+    calc(100% - 22px) calc(100% - 10px),
+    calc(100% - 22px) 100%,
+    22px 100%,
+    22px calc(100% - 10px),
+    10px calc(100% - 22px),
+    0 calc(100% - 22px),
+    0 22px,
+    10px 22px,
+    22px 10px
+  );
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
