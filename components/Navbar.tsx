@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { brand, navLinks } from "@/data/bakery-data";
@@ -8,7 +8,7 @@ import { InstagramIcon } from "@/components/ui/BrandIcons";
 import { ScallopBadge } from "@/components/ui/Decor";
 import { NavbarCartButton } from "@/components/cart-triggers";
 import { drawer, drawerItem, easeLuxury } from "@/lib/animations";
-import { external } from "@/lib/utils";
+import { cn, external } from "@/lib/utils";
 
 const leftLinks = navLinks.slice(0, 2);
 const rightLinks = navLinks.slice(2);
@@ -47,21 +47,40 @@ export function Navbar() {
 
   const compact = scrolled || open;
 
+  /**
+   * Mobile menu links: the body is scroll-locked while the menu is open, so a
+   * plain hash jump would be swallowed. Unlock first, then scroll. The URL hash
+   * is left alone on purpose: updating it via history makes the Next.js router
+   * scroll back to the top.
+   */
+  const goToSection = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    document.body.style.overflow = "";
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelector(href)?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    setOpen(false);
+  };
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <motion.div
-        initial={false}
-        animate={{ height: compact ? 0 : "auto", opacity: compact ? 0 : 1 }}
-        transition={{ duration: 0.35, ease: easeLuxury }}
-        className="overflow-hidden bg-terracotta linen text-center"
+      {/* CSS grid-rows collapse: animating height to "auto" with Framer Motion
+          measures the page via window.scrollTo, which cancels in-progress scrolls. */}
+      <div
+        aria-hidden={compact}
+        className={cn(
+          "grid bg-terracotta linen text-center transition-[grid-template-rows,opacity] duration-300 ease-(--ease-soft)",
+          compact ? "grid-rows-[0fr] opacity-0" : "grid-rows-[1fr] opacity-100",
+        )}
       >
+        <div className="overflow-hidden">
         <p className="px-4 py-2 font-serif text-[11px] font-semibold tracking-[0.12em] text-espresso uppercase sm:py-2.5 sm:text-sm">
           <span className="sm:hidden">✶ Coacem zilnic, în loturi mici ✶</span>
           <span className="hidden sm:inline">
             ✶ Coacem zilnic în loturi mici · Comandă până la ora 12 pentru ridicare a doua zi ✶
           </span>
         </p>
-      </motion.div>
+        </div>
+      </div>
 
       <motion.nav
         aria-label="Navigare principală"
@@ -152,7 +171,7 @@ export function Navbar() {
                 <motion.li key={link.href} variants={drawerItem} className="w-full">
                   <a
                     href={link.href}
-                    onClick={() => setOpen(false)}
+                    onClick={(e) => goToSection(e, link.href)}
                     className="flex min-h-12 items-center justify-center rounded-xl font-serif text-lg font-bold tracking-[0.14em] text-espresso uppercase transition-colors hover:bg-oat"
                   >
                     {link.label}
@@ -161,7 +180,7 @@ export function Navbar() {
               ))}
             </ul>
             <motion.div variants={drawerItem} className="relative z-10 px-2 pb-2">
-              <a href={brand.instagramUrl} {...external} className="btn-primary mt-3 w-full">
+              <a href={brand.instagramUrl} {...external} onClick={() => setOpen(false)} className="btn-primary mt-3 w-full">
                 <InstagramIcon size={18} />
                 Comandă Acum
               </a>
