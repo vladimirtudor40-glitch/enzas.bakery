@@ -1,4 +1,4 @@
-:HL["/enzas.bakery/_next/static/chunks/0t1xih12c2pao.css","style"]
+:HL["/enzas.bakery/_next/static/chunks/0ykej7p47m58z.css","style"]
 :HL["/enzas.bakery/_next/static/media/0ec8b6964dca4738-s.p.3khov2ymwgkd-.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/enzas.bakery/_next/static/media/16e00d4466991d3a-s.p.0u7-sg185rihs.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/enzas.bakery/_next/static/media/239cee0c94bb7994-s.p.0r-hpxzff6_t9.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
@@ -20,4 +20,4 @@
 :HL["/enzas.bakery/_next/static/media/f8a66589f2577848-s.p.27yhq-axkaxx4.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/enzas.bakery/_next/static/media/fe0eb311b7825c23-s.p.0j9q5eh89yf1o.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 1:[["children",{"s":"__PAGE__","h":160}]]
-0:{"b":"ToRw0_TYIlxFAOgUa3TBO","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"y_3UGFRvs-kz6ONJGzp21","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

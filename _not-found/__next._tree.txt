@@ -1,4 +1,4 @@
-:HL["/enzas.bakery/_next/static/chunks/0t1xih12c2pao.css","style"]
+:HL["/enzas.bakery/_next/static/chunks/0ykej7p47m58z.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
-0:{"b":"ToRw0_TYIlxFAOgUa3TBO","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"y_3UGFRvs-kz6ONJGzp21","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
