@@ -115,35 +115,43 @@ function ModalContent({ product, onClose }: { product: Product; onClose: () => v
             <h3 id={titleId} className="heading-caps text-2xl leading-tight sm:text-3xl">
               {product.name}
             </h3>
-            <p className="text-sm leading-relaxed text-cocoa">{product.description}</p>
+            {product.description && <p className="text-sm leading-relaxed text-cocoa">{product.description}</p>}
           </div>
 
           <div className="flex flex-wrap items-center gap-3 text-sm">
             <span className="font-serif text-3xl font-semibold">{formatPrice(product.price, product.priceFrom)}</span>
-            <span className="flex items-center gap-1.5 rounded-full bg-oat px-3 py-1 text-xs font-medium text-cocoa">
-              <Scale size={14} aria-hidden="true" className="text-sage-deep" />
-              {product.portion}
-            </span>
+            {product.portion && (
+              <span className="flex items-center gap-1.5 rounded-full bg-oat px-3 py-1 text-xs font-medium text-cocoa">
+                <Scale size={14} aria-hidden="true" className="text-sage-deep" />
+                {product.portion}
+              </span>
+            )}
           </div>
 
-          <div className="flex flex-col gap-2">
-            <h4 className="font-sans text-xs font-semibold tracking-[0.18em] text-cocoa uppercase">Ingrediente</h4>
-            <p className="text-sm leading-relaxed text-espresso">{product.ingredients.join(", ")}.</p>
-          </div>
+          {product.ingredients?.length ? (
+            <div className="flex flex-col gap-2">
+              <h4 className="font-sans text-xs font-semibold tracking-[0.18em] text-cocoa uppercase">Ingrediente</h4>
+              <p className="text-sm leading-relaxed text-espresso">{product.ingredients.join(", ")}.</p>
+            </div>
+          ) : null}
 
-          <div className="flex flex-col gap-2">
-            <h4 className="flex items-center gap-1.5 font-sans text-xs font-semibold tracking-[0.18em] text-cocoa uppercase">
-              <AlertTriangle size={14} aria-hidden="true" className="text-terracotta-dark" />
-              Alergeni
-            </h4>
-            <ul className="flex flex-wrap gap-2">
-              {product.allergens.map((a) => (
-                <li key={a} className="rounded-full border border-terracotta/30 bg-terracotta/8 px-3 py-1 text-xs font-semibold text-terracotta-dark">
-                  {a}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {product.allergens?.length ? (
+            <div className="flex flex-col gap-2">
+              <h4 className="flex items-center gap-1.5 font-sans text-xs font-semibold tracking-[0.18em] text-cocoa uppercase">
+                <AlertTriangle size={14} aria-hidden="true" className="text-terracotta-dark" />
+                Alergeni
+              </h4>
+              <ul className="flex flex-wrap gap-2">
+                {product.allergens.map((a) => (
+                  <li key={a} className="rounded-full border border-terracotta/30 bg-terracotta/8 px-3 py-1 text-xs font-semibold text-terracotta-dark">
+                    {a}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p className="text-sm leading-relaxed text-cocoa">Pentru ingrediente și alergeni, întreabă-ne pe WhatsApp sau în cofetărie.</p>
+          )}
 
           <div className="flex flex-col gap-2">
             <label htmlFor={notesId} className="text-sm font-semibold">

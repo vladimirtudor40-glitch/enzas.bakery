@@ -14,9 +14,12 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   turbopack: { root: process.cwd() },
   images: {
-    // GitHub Pages has no image optimizer; Unsplash URLs are already sized via `w=`.
+    // GitHub Pages has no image optimizer; Unsplash and Wolt URLs are already sized via `w=`.
     unoptimized: true,
-    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "imageproxy.wolt.com" },
+    ],
   },
 };
 

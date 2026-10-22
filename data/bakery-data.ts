@@ -8,7 +8,7 @@
 // Types
 // ---------------------------------------------------------------------------
 
-export type CategoryId = "toate" | "patiserie" | "torturi" | "paine" | "cadou";
+export type CategoryId = "toate" | "patiserie" | "focaccia" | "deserturi" | "bauturi";
 
 export interface Category {
   id: CategoryId;
@@ -19,14 +19,14 @@ export interface Product {
   id: string;
   name: string;
   category: Exclude<CategoryId, "toate">;
-  description: string;
-  portion: string;
+  description?: string;
+  portion?: string;
   price: number;
   /** Shown as "de la" (starting price) when true. */
   priceFrom?: boolean;
   /** Full ingredient list shown in the quick-view modal. */
-  ingredients: string[];
-  allergens: string[];
+  ingredients?: string[];
+  allergens?: string[];
   image: string;
   imageAlt: string;
   badge?: "Artizanal" | "Proaspăt scos din cuptor" | "Best-seller" | "Pe comandă";
@@ -63,6 +63,9 @@ export interface OpeningHour {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
+/** Product photo hosted on the bakery's Wolt menu, by asset id. */
+export const wolt = (id: string, width = 800) => `https://imageproxy.wolt.com/assets/${id}?w=${width}`;
 
 /** Builds an optimized Unsplash URL from a photo id. */
 export const unsplash = (id: string, width = 1200) =>
@@ -132,245 +135,46 @@ export const hero = {
 
 export const categories: Category[] = [
   { id: "toate", label: "Toate" },
-  { id: "patiserie", label: "Patiserie & Croissante" },
-  { id: "torturi", label: "Torturi & Deserturi" },
-  { id: "paine", label: "Pâine cu Maia" },
-  { id: "cadou", label: "Cutii Cadou" },
+  { id: "patiserie", label: "Patiserie Artizanală" },
+  { id: "focaccia", label: "Focaccia & Panini" },
+  { id: "deserturi", label: "Deserturi de Casă" },
+  { id: "bauturi", label: "Băuturi" },
 ];
 
 export const products: Product[] = [
-  // Patiserie & Croissante
-  {
-    id: "croissant-unt",
-    name: "Croissant clasic cu unt",
-    category: "patiserie",
-    description: "27 de straturi de aluat laminat manual cu unt 82% grăsime. Crocant afară, pufos și aerat înăuntru.",
-    portion: "90 g / buc.",
-    price: 9,
-    ingredients: ["făină de grâu tip 000", "unt 82%", "lapte integral", "zahăr", "drojdie", "sare de mare", "ou (glazură)"],
-    allergens: ["gluten", "lactoză", "ouă"],
-    image: unsplash("1623334044303-241021148842", 800),
-    imageAlt: "Croissante clasice cu unt pe hârtie de copt",
-    badge: "Proaspăt scos din cuptor",
-  },
-  {
-    id: "pain-au-chocolat",
-    name: "Pain au chocolat",
-    category: "patiserie",
-    description: "Aluat de croissant cu două batoane de ciocolată neagră belgiană 54%, glazurat cu ou.",
-    portion: "95 g / buc.",
-    price: 11,
-    ingredients: ["făină de grâu tip 000", "unt 82%", "ciocolată neagră 54%", "lapte", "zahăr", "drojdie", "sare", "ou"],
-    allergens: ["gluten", "lactoză", "ouă", "soia"],
-    image: unsplash("1483695028939-5bb13f8648b0", 800),
-    imageAlt: "Tavă cu pain au chocolat aurii",
-  },
-  {
-    id: "roll-gourmet",
-    name: "Roll gourmet cu scorțișoară",
-    category: "patiserie",
-    description: "Aluat brioșat cu unt, umplut cu scorțișoară de Ceylon și zahăr brun, finisat cu zahăr perlat.",
-    portion: "130 g / buc.",
-    price: 14,
-    ingredients: ["făină de grâu", "unt", "ouă", "lapte", "zahăr brun", "scorțișoară de Ceylon", "zahăr perlat", "drojdie", "sare"],
-    allergens: ["gluten", "lactoză", "ouă"],
-    image: unsplash("1509365465985-25d11c17e812", 800),
-    imageAlt: "Rulouri cu scorțișoară presărate cu zahăr perlat",
-    badge: "Best-seller",
-  },
-  {
-    id: "croissant-migdale",
-    name: "Croissant cu cremă de migdale",
-    category: "patiserie",
-    description: "Croissant copt de două ori, umplut cu frangipane de migdale și pudrat cu zahăr.",
-    portion: "120 g / buc.",
-    price: 13,
-    ingredients: ["croissant cu unt", "migdale măcinate", "unt", "zahăr", "ouă", "rom", "zahăr pudră"],
-    allergens: ["gluten", "lactoză", "ouă", "nuci (migdale)"],
-    image: unsplash("1555507036-ab1f4038808a", 800),
-    imageAlt: "Croissant pudrat cu zahăr pe o placă de ardezie",
-  },
-
-  // Torturi & Deserturi
-  {
-    id: "tort-zmeura-fistic",
-    name: "Tort cu fistic și zmeură",
-    category: "torturi",
-    description: "Blat cu fistic sicilian, mousse de mascarpone și jeleu de zmeură proaspătă.",
-    portion: "felie 150 g",
-    price: 28,
-    ingredients: ["fistic sicilian", "făină", "ouă", "zahăr", "mascarpone", "smântână dulce", "zmeură", "gelatină"],
-    allergens: ["gluten", "lactoză", "ouă", "nuci (fistic)"],
-    image: unsplash("1565958011703-44f9829ba187", 800),
-    imageAlt: "Felie de tort cu fistic și zmeură proaspătă",
-    badge: "Artizanal",
-  },
-  {
-    id: "tiramisu",
-    name: "Tiramisu della casa",
-    category: "torturi",
-    description: "Pișcoturi făcute de noi, însiropate în espresso, cremă de mascarpone și cacao olandeză.",
-    portion: "porție 180 g",
-    price: 24,
-    ingredients: ["mascarpone", "ouă", "zahăr", "pișcoturi de casă", "espresso", "cacao olandeză", "marsala"],
-    allergens: ["gluten", "lactoză", "ouă"],
-    image: unsplash("1571115177098-24ec42ed204d", 800),
-    imageAlt: "Porție de tiramisu cu bețișoare de ciocolată",
-  },
-  {
-    id: "tarta-lamaie",
-    name: "Tartă cu lămâie și bezea",
-    category: "torturi",
-    description: "Aluat sablé cu unt, cremă intensă de lămâie și bezea italiană flambată la comandă.",
-    portion: "felie 140 g · întreagă Ø22 cm – 160 RON",
-    price: 26,
-    ingredients: ["făină", "unt", "zahăr", "ouă", "lămâi", "albușuri", "vanilie"],
-    allergens: ["gluten", "lactoză", "ouă"],
-    image: unsplash("1519915028121-7d3463d20b13", 800),
-    imageAlt: "Tartă cu lămâie și bezea, cu o felie tăiată",
-  },
-  {
-    id: "padurea-neagra",
-    name: "Tort Pădurea Neagră",
-    category: "torturi",
-    description: "Blat de cacao, frișcă adevărată, vișine macerate și ganache de ciocolată neagră.",
-    portion: "1,5 kg · 10–12 porții",
-    price: 220,
-    ingredients: ["făină", "cacao", "ouă", "zahăr", "frișcă 35%", "vișine", "kirsch", "ciocolată neagră"],
-    allergens: ["gluten", "lactoză", "ouă", "soia"],
-    image: unsplash("1606890737304-57a1ca8a5b62", 800),
-    imageAlt: "Tort Pădurea Neagră cu cireșe și ciocolată",
-    badge: "Pe comandă",
-  },
-  {
-    id: "brownie",
-    name: "Brownie cu ciocolată belgiană",
-    category: "torturi",
-    description: "Dens, umed și intens — 70% cacao, unt și un strop de sare de mare.",
-    portion: "90 g / buc.",
-    price: 15,
-    ingredients: ["ciocolată belgiană 70%", "unt", "ouă", "zahăr brun", "făină", "sare de mare"],
-    allergens: ["gluten", "lactoză", "ouă", "soia"],
-    image: unsplash("1606313564200-e75d5e30476c", 800),
-    imageAlt: "Brownie stivuite stropite cu ciocolată topită",
-  },
-  {
-    id: "panna-cotta",
-    name: "Panna cotta cu căpșuni",
-    category: "torturi",
-    description: "Smântână dulce cu vanilie Bourbon, sub un strat de căpșuni marinate în lămâie.",
-    portion: "borcănel 160 g",
-    price: 18,
-    ingredients: ["smântână dulce", "lapte", "zahăr", "vanilie Bourbon", "gelatină", "căpșuni", "lămâie"],
-    allergens: ["lactoză"],
-    image: unsplash("1488477181946-6428a0291777", 800),
-    imageAlt: "Borcănele de panna cotta cu căpșuni proaspete",
-  },
-
-  // Pâine cu Maia
-  {
-    id: "paine-rustica",
-    name: "Pâine rustică cu maia",
-    category: "paine",
-    description: "Făină albă și integrală de grâu, apă, sare și maia. Fermentată 48 de ore la rece.",
-    portion: "800 g",
-    price: 22,
-    ingredients: ["făină albă de grâu", "făină integrală", "apă", "maia", "sare de mare"],
-    allergens: ["gluten"],
-    image: unsplash("1589367920969-ab8e050bbb04", 800),
-    imageAlt: "Pâine rotundă cu maia, cu crustă crăpată",
-    badge: "Artizanal",
-  },
-  {
-    id: "paine-seminte",
-    name: "Pâine cu secară și semințe",
-    category: "paine",
-    description: "Secară, semințe de floarea-soarelui, in și dovleac prăjite. Miez umed, gust de nucă.",
-    portion: "750 g",
-    price: 24,
-    ingredients: ["făină de secară", "făină de grâu", "maia", "semințe de floarea-soarelui", "in", "semințe de dovleac", "sare"],
-    allergens: ["gluten", "semințe"],
-    image: unsplash("1509440159596-0249088772ff", 800),
-    imageAlt: "Pâini cu secară și semințe lângă spice de grâu",
-  },
-  {
-    id: "paine-integrala",
-    name: "Pâine integrală feliată",
-    category: "paine",
-    description: "100% făină integrală măcinată la piatră, feliată pentru micul dejun al întregii săptămâni.",
-    portion: "700 g",
-    price: 20,
-    ingredients: ["făină integrală măcinată la piatră", "apă", "maia", "sare de mare"],
-    allergens: ["gluten"],
-    image: unsplash("1549931319-a545dcf3bc73", 800),
-    imageAlt: "Pâine integrală feliată pe un fund de lemn",
-  },
-  {
-    id: "bagheta",
-    name: "Baghetă franțuzească",
-    category: "paine",
-    description: "Poolish de 16 ore, crustă subțire care cântă când iese din cuptor, miez cu alveole mari.",
-    portion: "280 g",
-    price: 9,
-    ingredients: ["făină de grâu T65", "apă", "poolish", "drojdie", "sare de mare"],
-    allergens: ["gluten"],
-    image: unsplash("1568471173242-461f0a730452", 800),
-    imageAlt: "Baghete franțuzești aurii",
-    badge: "Proaspăt scos din cuptor",
-  },
-
-  // Cutii Cadou / Evenimente
-  {
-    id: "cutie-macarons",
-    name: "Cutie macarons",
-    category: "cadou",
-    description: "12 macarons asortate: fistic, zmeură, caramel sărat, vanilie, ciocolată și lavandă.",
-    portion: "12 buc. · cutie cadou",
-    price: 85,
-    ingredients: ["făină de migdale", "albușuri", "zahăr", "unt", "ciocolată albă", "piure de fructe", "fistic"],
-    allergens: ["ouă", "lactoză", "nuci (migdale, fistic)"],
-    image: unsplash("1569864358642-9d1684040f43", 800),
-    imageAlt: "Macarons colorate în nuanțe pastelate",
-  },
-  {
-    id: "platou-tartelete",
-    name: "Platou tartelete cu fructe",
-    category: "cadou",
-    description: "Tartelete cu cremă de vanilie, fructe de sezon și flori comestibile — perfecte pentru candy bar.",
-    portion: "20 buc.",
-    price: 180,
-    ingredients: ["aluat sablé cu unt", "cremă de vanilie", "fructe de sezon", "flori comestibile", "gem de caise"],
-    allergens: ["gluten", "lactoză", "ouă"],
-    image: unsplash("1495147466023-ac5c588e2e94", 800),
-    imageAlt: "Tartelete cu fructe și flori comestibile aranjate pe un platou",
-    badge: "Pe comandă",
-  },
-  {
-    id: "cutie-cookies",
-    name: "Cutie cookies artizanale",
-    category: "cadou",
-    description: "Cookies cu unt rumenit, bucăți de ciocolată neagră și fulgi de sare. Ambalate cadou.",
-    portion: "8 buc.",
-    price: 60,
-    ingredients: ["unt rumenit", "zahăr brun", "făină", "ouă", "ciocolată neagră", "fulgi de sare"],
-    allergens: ["gluten", "lactoză", "ouă", "soia"],
-    image: unsplash("1558961363-fa8fdf82db35", 800),
-    imageAlt: "Cookies cu ciocolată într-un coș învelit în hârtie",
-  },
-  {
-    id: "tort-eveniment",
-    name: "Tort de eveniment personalizat",
-    category: "cadou",
-    description: "Nunți, botezuri, aniversări. Gândim împreună aromele, designul și decorul floral.",
-    portion: "minim 2 kg",
-    price: 180,
-    priceFrom: true,
-    ingredients: ["ingrediente stabilite la degustare", "unt", "ouă", "smântână", "fructe de sezon"],
-    allergens: ["gluten", "lactoză", "ouă", "poate conține nuci"],
-    image: unsplash("1535254973040-607b474cb50d", 800),
-    imageAlt: "Tort de nuntă pe trei etaje decorat cu trandafiri",
-    badge: "Pe comandă",
-  },
+  // Patiserie artizanală
+  { id: "saleuri-telemea", name: "Săleuri foietate artizanale cu telemea", category: "patiserie", price: 20, image: wolt("6824602233bd1585310187a2"), imageAlt: "Săleuri foietate artizanale cu telemea", badge: "Best-seller" },
+  { id: "saratele-chimen", name: "Sărățele de casă cu chimen", category: "patiserie", price: 20, image: wolt("6824602233bd1585310187a6"), imageAlt: "Sărățele de casă cu chimen" },
+  { id: "saratele-susan", name: "Sărățele cu susan", category: "patiserie", price: 20, image: wolt("6824602233bd1585310187a1"), imageAlt: "Sărățele cu susan" },
+  { id: "cocoace-branza", name: "Cocoace cu brânză", category: "patiserie", price: 18, image: wolt("6824602533bd1585310187ad"), imageAlt: "Cocoace cu brânză" },
+  { id: "placinta-dovleac", name: "Plăcintă cu dovleac", category: "patiserie", price: 15, image: wolt("6824602233bd1585310187a3"), imageAlt: "Plăcintă cu dovleac" },
+  // Focaccia & panini
+  { id: "focaccia-artizanala", name: "Focaccia artizanală", category: "focaccia", price: 15, image: wolt("6824602033bd15853101879e"), imageAlt: "Focaccia artizanală", badge: "Best-seller" },
+  { id: "panini-prosciutto-crudo", name: "Focaccia panini prosciutto crudo", category: "focaccia", price: 39, image: wolt("6824602033bd15853101879c"), imageAlt: "Focaccia panini prosciutto crudo" },
+  { id: "panini-pollo", name: "Focaccia panini pollo", category: "focaccia", price: 39, image: wolt("6824602033bd158531018799"), imageAlt: "Focaccia panini pollo", badge: "Best-seller" },
+  { id: "panini-prosciutto-cotto", name: "Focaccia panini prosciutto cotto", category: "focaccia", price: 39, image: wolt("6824602033bd1585310187a0"), imageAlt: "Focaccia panini prosciutto cotto" },
+  { id: "panini-curcan-mango", name: "Panini curcan & chutney de mango", category: "focaccia", price: 39, image: wolt("6ad1a6b5fe22dd5378463df0"), imageAlt: "Panini curcan & chutney de mango", badge: "Best-seller" },
+  { id: "panini-mortadella", name: "Panini mortadella, fistic & honey mustard", category: "focaccia", price: 39, image: wolt("6ad1a6afb68d0cff9a4a91d5"), imageAlt: "Panini mortadella, fistic & honey mustard" },
+  // Deserturi de casă
+  { id: "carrot-cake", name: "Carrot cake", category: "deserturi", price: 28, image: wolt("6824601cf0f02a621e45c6af"), imageAlt: "Carrot cake" },
+  { id: "tort-mango", name: "Tort mango", category: "deserturi", price: 30, image: wolt("6ad1a880d747dc77f71fa464"), imageAlt: "Tort mango" },
+  { id: "pistachio-cookie", name: "Pistachio cookie", category: "deserturi", price: 15, image: wolt("6824602733bd1585310187b5"), imageAlt: "Pistachio cookie" },
+  { id: "cookies-ciocolata", name: "Cookies cu ciocolată belgiană", category: "deserturi", price: 20, image: wolt("68246021f0f02a621e45c6c2"), imageAlt: "Cookies cu ciocolată belgiană" },
+  { id: "islere", name: "Islere", category: "deserturi", description: "Fursecuri cu alune de pădure și ciocolată belgiană.", price: 25, image: wolt("6ad1a6d0fe22dd5378463df7"), imageAlt: "Islere" },
+  { id: "nuci-ciocolata", name: "Nuci cu ciocolată", category: "deserturi", price: 16, image: wolt("68246019f0f02a621e45c6a5"), imageAlt: "Nuci cu ciocolată" },
+  // Băuturi
+  { id: "cappuccino", name: "Cappuccino Baque", category: "bauturi", price: 18, image: wolt("68246021f0f02a621e45c6bd"), imageAlt: "Cappuccino Baque" },
+  { id: "espresso-scurt", name: "Espresso scurt Baque", category: "bauturi", price: 14, image: wolt("68246021f0f02a621e45c6bf"), imageAlt: "Espresso scurt Baque" },
+  { id: "espresso-lung", name: "Espresso lung Baque", category: "bauturi", price: 14, image: wolt("68246024f0f02a621e45c6cb"), imageAlt: "Espresso lung Baque" },
+  { id: "pink-latte", name: "Pink latte", category: "bauturi", portion: "500 ml", price: 20, image: wolt("68246024f0f02a621e45c6c6"), imageAlt: "Pink latte" },
+  { id: "matcha-latte", name: "Matcha latte", category: "bauturi", price: 20, image: wolt("68246024f0f02a621e45c6c7"), imageAlt: "Matcha latte" },
+  { id: "babycino", name: "Babycino", category: "bauturi", price: 20, image: wolt("68246024f0f02a621e45c6c5"), imageAlt: "Babycino" },
+  { id: "english-tea", name: "English tea Baque", category: "bauturi", price: 12, image: wolt("68246024f0f02a621e45c6c8"), imageAlt: "English tea Baque" },
+  { id: "dorna-minerala", name: "Apă Dorna minerală", category: "bauturi", portion: "500 ml", price: 12, image: wolt("68246021f0f02a621e45c6c1"), imageAlt: "Apă Dorna minerală" },
+  { id: "dorna-plata", name: "Apă Dorna plată", category: "bauturi", portion: "500 ml", price: 12, image: wolt("68246021f0f02a621e45c6c0"), imageAlt: "Apă Dorna plată" },
+  { id: "coca-cola", name: "Coca-Cola", category: "bauturi", portion: "330 ml", price: 14, image: wolt("68246024f0f02a621e45c6c4"), imageAlt: "Coca-Cola", badge: "Best-seller" },
+  { id: "fanta", name: "Fanta", category: "bauturi", portion: "330 ml", price: 14, image: wolt("68246024f0f02a621e45c6c9"), imageAlt: "Fanta" },
+  { id: "sprite", name: "Sprite", category: "bauturi", portion: "330 ml", price: 14, image: wolt("68246024f0f02a621e45c6ca"), imageAlt: "Sprite" },
 ];
 
 // ---------------------------------------------------------------------------
