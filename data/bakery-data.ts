@@ -274,48 +274,42 @@ export const instagramPosts: InstagramPost[] = [
 // Testimonials
 // ---------------------------------------------------------------------------
 
+/** Real 5-star Google reviews; only diacritics and typos corrected, surnames shortened to an initial. */
 export const testimonials: Testimonial[] = [
   {
     id: "t1",
-    name: "Cristina V.",
-    context: "Clientă din Constanța",
+    name: "Ștefan L.",
+    context: "Recenzie Google",
     rating: 5,
-    quote: "Vin aici pentru cafeaua de dimineață și rămân pentru croissant. Se simte untul la fiecare mușcătură, iar atmosfera te face să uiți că ești în grabă.",
+    quote: "Un loc pt. suflet unde întâlnești oameni minunați ce servesc produse cu un gust desăvârșit. Cinamon rolls este numărul 1 pe toată Constanța, sper să le facă și în sezonul cald iar eu de câte ori sunt în Constanța revin cu mare bucurie. Recomand cu tot dragul 😋",
   },
   {
     id: "t2",
-    name: "Radu P.",
-    context: "Comandă tort aniversar",
+    name: "Angela D.",
+    context: "Recenzie Google",
     rating: 5,
-    quote: "Am comandat Pădurea Neagră pentru ziua soției. Arăta superb și avea gustul tortului bunicii — frișcă adevărată, vișine, nimic artificial.",
+    quote: "Enza's Bakery este una dintre locațiile mele preferate și o recomand cu tot dragul. Atmosfera este primitoare, locația are un design modern, personalul este foarte prietenos. Produsele sunt absolut delicioase și proaspete! 💗",
   },
   {
     id: "t3",
-    name: "Ioana C.",
-    context: "Candy bar botez",
+    name: "Radu Florian C.",
+    context: "Recenzie Google",
     rating: 5,
-    quote: "Candy bar-ul de la botez a fost vedeta petrecerii. Ne-au ajutat cu tot, de la arome până la aranjare. Toți invitații au cerut numărul lor.",
+    quote: "Am venit aici la recomandarea unui prieten și mi-a depășit așteptările. Am luat niște sărățele și au fost cele mai bune pe care le-am mâncat, prăjitura cu Snickers a fost delicioasă iar salamul de biscuiți este un „Must Have”. Personalul foarte serviabil și plăcut. Recomand cu încredere!",
   },
   {
     id: "t4",
-    name: "Mihai D.",
-    context: "Client fidel",
+    name: "Tiberiu P.",
+    context: "Recenzie Google",
     rating: 5,
-    quote: "Iau pâine cu maia în fiecare sâmbătă. Ține fragedă câteva zile, iar crusta aceea crocantă nu o găsești la supermarket.",
+    quote: "Cheesecake-ul Dubai este absolut delicios, iar panini-ul cu produse locale de calitate este un deliciu. E genul de loc unde simți pasiunea și dedicarea în fiecare preparat. Decorul este minunat, cu un aer franțuzesc care completează perfect atmosfera primitoare. O afacere de familie cum rar mai găsești – o recomand cu toată încrederea!",
   },
   {
     id: "t5",
-    name: "Elena S.",
-    context: "Eveniment corporate",
+    name: "Andrada P.",
+    context: "Recenzie Google",
     rating: 5,
-    quote: "Am comandat cutii cadou pentru echipă de sărbători. Ambalaj elegant, livrare la timp și feedback excelent de la colegi.",
-  },
-  {
-    id: "t6",
-    name: "Alexandra T.",
-    context: "Mic dejun de duminică",
-    rating: 5,
-    quote: "Roll-ul cu scorțișoară și o cafea pe terasă — ritualul nostru de duminică. Personalul e mereu zâmbitor și îți recomandă ce e proaspăt.",
+    quote: "Sandvișuri extraordinar de bune! Prăjituri pe măsură! Servire / pregătire / amabilitate nota 10/10. Recomand cu mare încredere! Nu am fost niciodată dezamăgită de calitate!",
   },
 ];
 
