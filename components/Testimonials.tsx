@@ -21,12 +21,13 @@ export function Testimonials() {
           description={`${brand.googleRating.toLocaleString("ro-RO")} din 5 stele, din ${brand.googleReviewCount} de recenzii pe Google.`}
         />
 
+        {/* Flex-wrap instead of grid so an incomplete last row stays centered. */}
         <motion.ul
           variants={staggerContainer(0.12)}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pt-12 pb-6 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-14 sm:overflow-visible sm:px-0 sm:pt-8 sm:pb-0 lg:grid-cols-3"
+          className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pt-12 pb-6 sm:mx-0 sm:flex-wrap sm:justify-center sm:gap-x-6 sm:gap-y-14 sm:overflow-visible sm:px-0 sm:pt-8 sm:pb-0"
         >
           {testimonials.map((t, i) => (
             <motion.li
@@ -35,7 +36,7 @@ export function Testimonials() {
               whileHover={{ y: -6, rotate: 0 }}
               style={{ rotate: tilts[i % tilts.length] }}
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
-              className="stitched relative flex w-[82%] shrink-0 snap-center flex-col items-center gap-5 rounded-[1.5rem] bg-cream linen px-6 pt-14 pb-7 text-center shadow-warm-lg sm:w-auto sm:px-7 sm:pt-16 sm:pb-8"
+              className="stitched relative flex w-[82%] shrink-0 snap-center flex-col items-center gap-5 rounded-[1.5rem] bg-cream linen px-6 pt-14 pb-7 text-center shadow-warm-lg sm:w-[calc(50%-0.75rem)] sm:px-7 lg:w-[calc((100%-3rem)/3)] sm:pt-16 sm:pb-8"
             >
               {/* Stamp hanging over the top edge, like a dated badge */}
               <div className="absolute -top-10 left-1/2 z-20 -translate-x-1/2">
