@@ -21,4 +21,4 @@
 :HL["/enzas.bakery/_next/static/media/fe0eb311b7825c23-s.p.0j9q5eh89yf1o.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"politica-cookies","h":96,"c":"$Q2"}]]
-0:{"b":"pPssAXsHQz8Do-BuJjKEq","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"n7gVVgAshRHYHo8m9nPLs","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

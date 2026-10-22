@@ -1,4 +1,4 @@
 :HL["/enzas.bakery/_next/static/chunks/1j6rw4845_8fg.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
-0:{"b":"pPssAXsHQz8Do-BuJjKEq","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"n7gVVgAshRHYHo8m9nPLs","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
