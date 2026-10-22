@@ -27,5 +27,14 @@ Toate textele, prețurile, programul, numărul de WhatsApp (`WHATSAPP_NUMBER`) �
 npm install
 npm run dev      # http://localhost:3000
 npm run build    # export static în ./out
-npm run deploy   # build + publicare pe GitHub Pages (branch gh-pages)
+npm run deploy   # build + publicare manuală pe GitHub Pages (branch gh-pages)
 ```
+
+## Publicare automată
+
+La fiecare push pe `main`, workflow-ul [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+verifică codul, face build-ul și publică site-ul pe branch-ul `gh-pages`. Pentru pull request-uri
+rulează doar verificarea și build-ul.
+
+Adresa publică a site-ului (`SITE_URL`, folosită pentru sitemap și imaginea de share) este tot în
+[`data/bakery-data.ts`](data/bakery-data.ts).
