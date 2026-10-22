@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Amatic_SC, Lobster, Zilla_Slab } from "next/font/google";
 import { Providers } from "@/components/Providers";
-import { brand } from "@/data/bakery-data";
+import { SITE_URL, brand } from "@/data/bakery-data";
 import "./globals.css";
 
 const zilla = Zilla_Slab({
@@ -27,12 +27,16 @@ const lobster = Lobster({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(`${SITE_URL}/`),
   title: `${brand.name} — Brutărie & Patiserie Artizanală în Constanța`,
   description:
     "Pâine cu maia, croissante cu unt, torturi și deserturi artizanale coapte zilnic în loturi mici. Comenzi pe WhatsApp și Instagram @enzas.bakery.",
   openGraph: {
     title: `${brand.name} — Brutărie & Patiserie Artizanală`,
     description: "Pâine coaptă cu suflet, în fiecare dimineață. Aleea Violetelor 3, Constanța.",
+    url: `${SITE_URL}/`,
+    siteName: brand.name,
+    images: [{ url: `${SITE_URL}/og-image.png`, width: 1200, height: 630, alt: brand.name }],
     locale: "ro_RO",
     type: "website",
   },
