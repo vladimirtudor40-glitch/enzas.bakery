@@ -188,7 +188,7 @@ export function CartDrawer() {
                                   <Trash2 size={16} />
                                 </button>
                               </div>
-                              <p className="-mt-2 text-xs text-cocoa">{item.portion}</p>
+                              {item.portion && <p className="-mt-2 text-xs text-cocoa">{item.portion}</p>}
                               {item.notes && <p className="text-xs text-cocoa italic">„{item.notes}”</p>}
                               <div className="mt-auto flex items-center justify-between gap-2">
                                 <div className="flex items-center rounded-full bg-oat">

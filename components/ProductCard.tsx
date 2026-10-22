@@ -84,11 +84,13 @@ export function ProductCard({ product, onQuickView, ref }: ProductCardProps) {
             {product.name}
           </button>
         </h3>
-        <p className="hidden text-sm leading-relaxed text-cocoa sm:block">{product.description}</p>
-        <p className="flex items-center gap-1.5 text-[11px] font-medium text-cocoa sm:text-xs">
-          <Scale size={14} aria-hidden="true" className="shrink-0 text-sage-deep" />
-          {product.portion}
-        </p>
+        {product.description && <p className="hidden text-sm leading-relaxed text-cocoa sm:block">{product.description}</p>}
+        {product.portion && (
+          <p className="flex items-center gap-1.5 text-[11px] font-medium text-cocoa sm:text-xs">
+            <Scale size={14} aria-hidden="true" className="shrink-0 text-sage-deep" />
+            {product.portion}
+          </p>
+        )}
 
         <div className="mt-auto flex flex-col items-stretch gap-2 border-t-2 border-dashed border-espresso/20 pt-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:pt-4">
           <p className="font-serif text-xl font-bold text-terracotta-dark sm:text-2xl">

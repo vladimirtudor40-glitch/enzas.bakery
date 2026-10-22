@@ -33,7 +33,7 @@ export function formatOrderMessage(items: CartItem[], details: OrderDetails) {
   const lines: string[] = [`Bună ziua! Aș dori să plasez o comandă la ${brand.name}:`, "", "🧺 PRODUSE"];
 
   items.forEach((item, index) => {
-    lines.push(`${index + 1}. ${item.name} (${item.portion})`);
+    lines.push(`${index + 1}. ${item.name}${item.portion ? ` (${item.portion})` : ""}`);
     lines.push(`   ${item.quantity} × ${formatPrice(item.price, item.priceFrom)} = ${formatPrice(item.price * item.quantity)}`);
     if (item.notes) lines.push(`   Mențiune: ${item.notes}`);
   });
